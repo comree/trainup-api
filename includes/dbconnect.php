@@ -20,7 +20,7 @@
                     $pass = defined('DB_PASSWORD') ? DB_PASSWORD : '';
                     $name = defined('DB_NAME') ? DB_NAME : '';
 
-                    $sslMode = getenv('DB_SSLMODE') ?: 'prefer';
+                    $sslMode = getenv('DB_SSLMODE') ?: 'require';
                     $dsn = "pgsql:host={$host};port={$port};dbname={$name};sslmode={$sslMode}";
 
                     $pdo = new PDO($dsn, $user, $pass, [
