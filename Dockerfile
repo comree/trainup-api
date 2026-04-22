@@ -4,6 +4,11 @@ WORKDIR /app
 
 COPY . .
 
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends libpq-dev \
+	&& docker-php-ext-install pdo pdo_pgsql \
+	&& rm -rf /var/lib/apt/lists/*
+
 RUN composer install --no-dev 2>/dev/null || true
 
 EXPOSE $PORT
