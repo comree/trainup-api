@@ -13,11 +13,11 @@
 
     // Prefer DATABASE_URL/POSTGRES_URL from Render if present
     $databaseUrl = getenv('DATABASE_URL') ?: getenv('POSTGRES_URL');
-    $dbHost = getenv('DB_HOST') ?: 'localhost';
-    $dbPort = getenv('DB_PORT') ?: '5432';
-    $dbName = getenv('DB_NAME') ?: 'train_up';
-    $dbUser = getenv('DB_USER') ?: 'postgres';
-    $dbPassword = getenv('DB_PASSWORD') ?: '';
+    $dbHost = getenv('DB_HOST') ?: (getenv('PGHOST') ?: 'localhost');
+    $dbPort = getenv('DB_PORT') ?: (getenv('PGPORT') ?: '5432');
+    $dbName = getenv('DB_NAME') ?: (getenv('PGDATABASE') ?: 'train_up');
+    $dbUser = getenv('DB_USER') ?: (getenv('PGUSER') ?: 'postgres');
+    $dbPassword = getenv('DB_PASSWORD') ?: (getenv('PGPASSWORD') ?: '');
 
     if (!empty($databaseUrl)) {
         $parts = parse_url($databaseUrl);
